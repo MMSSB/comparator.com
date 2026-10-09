@@ -22,8 +22,20 @@
 <nav class="navbar nav-center drawer-right nav-bottom">
     <div class="nav-content">
         <!-- 1. Logo -->
-        <a href="index.html" class="nav-logo uppercase tracking-widest">Comparator</a>
-        
+        <!-- <a href="index.html" class="nav-logo uppercase tracking-widest">Comparator</a> -->
+        <!-- 1. Logo (Replace this in all your HTML files) -->
+<a href="index.html" class="nav-logo uppercase tracking-widest" style="display: flex; align-items: center; gap: 0.5rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 1.5rem; height: 1.5rem;">
+        <!-- Left Document (Minus) -->
+        <rect x="2" y="4" width="8" height="16"></rect>
+        <line x1="4" y1="12" x2="8" y2="12"></line>
+        <!-- Right Document (Plus) -->
+        <rect x="14" y="4" width="8" height="16"></rect>
+        <line x1="16" y1="12" x2="20" y2="12"></line>
+        <line x1="18" y1="10" x2="18" y2="14"></line>
+    </svg>
+    Comparator
+</a>
         <!-- 2. Nav Links & Theme Switcher (Combined for Mobile Drawer Support) -->
         <div class="nav-center-group" id="nav-center-group">
             <div class="nav-links uppercase tracking-widest">
@@ -60,12 +72,11 @@
 </nav>
 
     <main class="container flex-grow" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2rem; padding: 3rem 1.5rem;">
-        <h1 class="uppercase font-bold" style="font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1;">Developer Tools</h1>
+        <h1 class="uppercase font-bold" style="font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1;">Comparator</h1>
         <p class="text-muted font-mono" style="font-size: 1.25rem; max-width: 42rem;">
-            A minimalist, brutalist suite for fast text analysis and data tracking.
-        </p>
+A minimalist, brutalist suite for fast text analysis and exact difference tracking.        </p>
         <a href="compare.html" class="btn-primary uppercase tracking-widest" style="margin-top: 1rem;">
-            Open Text Comparator
+            Open Comparator
         </a>
     </main>
 

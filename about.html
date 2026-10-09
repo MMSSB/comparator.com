@@ -15,14 +15,44 @@
 </head>
 <body>
 
+    <!-- Desktop Alignments:
+
+nav-right (Default)
+
+nav-left
+
+nav-center
+
+Mobile Drawer Animations:
+
+drawer-right (Default)
+
+drawer-left
+
+drawer-top
+
+drawer-bottom -->
+
     <!-- Change class to set layout: nav-default | nav-left | nav-center | nav-side -->
 <!-- Change class to: nav-right (Default), nav-left, or nav-center -->
 <!-- Example Mix: Desktop Right Align + Mobile Top Drawer + Floating Container -->
 <nav class="navbar nav-center drawer-right nav-bottom">
     <div class="nav-content">
         <!-- 1. Logo -->
-        <a href="index.html" class="nav-logo uppercase tracking-widest">Comparator</a>
-        
+        <!-- <a href="index.html" class="nav-logo uppercase tracking-widest">Comparator</a> -->
+        <!-- 1. Logo (Replace this in all your HTML files) -->
+<a href="index.html" class="nav-logo uppercase tracking-widest" style="display: flex; align-items: center; gap: 0.5rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 1.5rem; height: 1.5rem;">
+        <!-- Left Document (Minus) -->
+        <rect x="2" y="4" width="8" height="16"></rect>
+        <line x1="4" y1="12" x2="8" y2="12"></line>
+        <!-- Right Document (Plus) -->
+        <rect x="14" y="4" width="8" height="16"></rect>
+        <line x1="16" y1="12" x2="20" y2="12"></line>
+        <line x1="18" y1="10" x2="18" y2="14"></line>
+    </svg>
+    Comparator
+</a>
         <!-- 2. Nav Links & Theme Switcher (Combined for Mobile Drawer Support) -->
         <div class="nav-center-group" id="nav-center-group">
             <div class="nav-links uppercase tracking-widest">
@@ -58,18 +88,21 @@
     </div>
 </nav>
 
-    <main class="container container-sm flex-grow" style="display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;">
+<main class="container container-sm flex-grow" style="display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;">
+        
         <header style="border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;">
             <h1 class="uppercase font-bold" style="font-size: 2.25rem;">About This Project</h1>
         </header>
 
+        <!-- Description -->
         <section class="card">
-            <h2 class="uppercase tracking-widest" style="font-size: 1.25rem; margin-bottom: 1rem;">What is this?</h2>
+            <h2 class="uppercase tracking-widest" style="font-size: 1.25rem; margin-bottom: 1rem;">What is Comparator?</h2>
             <p class="font-mono text-muted" style="line-height: 1.6;">
                 This tool suite is designed for developers and writers who need precise, noise-free text analysis. The primary feature is a Longest Common Subsequence (LCS) based difference engine that highlights exact insertions and deletions between two bodies of text. It operates entirely client-side, ensuring your data never leaves your browser.
             </p>
         </section>
 
+        <!-- Credits -->
         <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
             <div style="border: 2px solid var(--border-color); padding: 2rem; display: flex; flex-direction: column; justify-content: center;">
                 <h3 class="text-muted uppercase tracking-widest" style="font-size: 0.875rem; margin-bottom: 0.25rem;">Creator</h3>
@@ -78,7 +111,7 @@
             </div>
 
             <div style="display: flex; align-items: center; justify-content: center;">
-                <a href="https://github.com/mmssb" target="_blank" rel="noopener noreferrer" class="btn-primary uppercase tracking-widest" style="width: 100%; font-size: 1rem; box-shadow: var(--shadow-sm);">
+                <a href="https://github.com/MMSSB/Comparator.com" target="_blank" rel="noopener noreferrer" class="btn-primary uppercase tracking-widest" style="width: 100%; font-size: 1rem; box-shadow: var(--shadow-sm);">
                     <svg style="width: 1.5rem; height: 1.5rem;" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
                     View on GitHub
                 </a>
