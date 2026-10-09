@@ -3,61 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workspace | Compare</title>
-    
+    <title>Comparator | Compare</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
     <script>
-        function getThemePreference() {
-            if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-                return localStorage.getItem('theme');
-            }
-            return 'system';
-        }
-        function applyTheme(theme) {
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else if (theme === 'light') {
-                document.documentElement.classList.remove('dark');
-            } else {
-                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            }
-        }
-        applyTheme(getThemePreference());
+        const t = localStorage.getItem('theme') || 'system';
+        if (t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); }
     </script>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="index.html" class="nav-logo uppercase tracking-widest">Workspace</a>
+    <!-- Change class to set layout: nav-default | nav-left | nav-center | nav-side -->
+<!-- Change class to: nav-right (Default), nav-left, or nav-center -->
+<!-- Example Mix: Desktop Right Align + Mobile Top Drawer + Floating Container -->
+<nav class="navbar nav-center drawer-right nav-bottom">
+    <div class="nav-content">
+        <!-- 1. Logo -->
+        <a href="index.html" class="nav-logo uppercase tracking-widest">Comparator</a>
+        
+        <!-- 2. Nav Links & Theme Switcher (Combined for Mobile Drawer Support) -->
+        <div class="nav-center-group" id="nav-center-group">
             <div class="nav-links uppercase tracking-widest">
-                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link ">Home</a>
                 <a href="compare.html" class="nav-link active">Compare</a>
                 <a href="about.html" class="nav-link">About</a>
             </div>
+
+            <!-- Modern Icon Theme Switcher -->
+            <div class="theme-switcher-nav">
+                <button id="theme-light" class="theme-icon-btn" aria-label="Light Theme">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+                <button id="theme-dark" class="theme-icon-btn" aria-label="Dark Theme">
+                    <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button id="theme-system" class="theme-icon-btn" aria-label="System Theme">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </button>
+            </div>
         </div>
-    </nav>
+
+        <!-- 3. Mobile Hamburger Toggle -->
+        <div class="nav-actions">
+            <button class="nav-toggle" id="mobile-menu-btn" aria-label="Toggle menu">
+                <div class="hamburger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
 
     <div class="container flex-grow" style="display: flex; flex-direction: column; gap: 2rem;">
         
         <header class="compare-header">
             <div>
-                <h1 class="compare-title uppercase font-bold">Text Comparator</h1>
+                <h1 class="uppercase font-bold" style="font-size: 1.875rem;">Text Comparator</h1>
                 <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">Analyze differences with precision.</p>
-            </div>
-
-            <div class="theme-switcher uppercase tracking-widest">
-                <button onclick="setTheme('light')" id="btn-light" class="theme-btn">Light</button>
-                <button onclick="setTheme('dark')" id="btn-dark" class="theme-btn">Dark</button>
-                <button onclick="setTheme('system')" id="btn-system" class="theme-btn">System</button>
             </div>
         </header>
 
@@ -86,121 +92,12 @@
                         <span class="diff-legend-item"><span class="diff-box del"></span> Deletions</span>
                     </div>
                 </div>
-                
                 <div id="diff-output" class="card diff-output"></div>
             </div>
         </main>
     </div>
 
-    <script>
-        const themeButtons = {
-            light: document.getElementById('btn-light'),
-            dark: document.getElementById('btn-dark'),
-            system: document.getElementById('btn-system')
-        };
-
-        function updateActiveButton(theme) {
-            Object.values(themeButtons).forEach(btn => btn.classList.remove('active'));
-            if(themeButtons[theme]) {
-                themeButtons[theme].classList.add('active');
-            }
-        }
-
-        function setTheme(theme) {
-            localStorage.setItem('theme', theme);
-            applyTheme(theme);
-            updateActiveButton(theme);
-        }
-
-        updateActiveButton(getThemePreference());
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (getThemePreference() === 'system') applyTheme('system');
-        });
-
-        function tokenize(text) {
-            return text.match(/(\w+|\s+|[^\w\s])/g) || [];
-        }
-
-        function computeDiff(oldStr, newStr) {
-            const oldTokens = tokenize(oldStr);
-            const newTokens = tokenize(newStr);
-            const dp = Array(oldTokens.length + 1).fill(null).map(() => Array(newTokens.length + 1).fill(0));
-
-            for (let i = 1; i <= oldTokens.length; i++) {
-                for (let j = 1; j <= newTokens.length; j++) {
-                    if (oldTokens[i - 1] === newTokens[j - 1]) {
-                        dp[i][j] = dp[i - 1][j - 1] + 1;
-                    } else {
-                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                    }
-                }
-            }
-
-            let i = oldTokens.length, j = newTokens.length;
-            const diff = [];
-
-            while (i > 0 || j > 0) {
-                if (i > 0 && j > 0 && oldTokens[i - 1] === newTokens[j - 1]) {
-                    diff.push({ type: 'equal', value: oldTokens[i - 1] });
-                    i--; j--;
-                } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
-                    diff.push({ type: 'add', value: newTokens[j - 1] });
-                    j--;
-                } else if (i > 0 && (j === 0 || dp[i][j - 1] < dp[i - 1][j])) {
-                    diff.push({ type: 'remove', value: oldTokens[i - 1] });
-                    i--;
-                }
-            }
-            return diff.reverse();
-        }
-
-        const btnCompare = document.getElementById('compare-btn');
-        const txtOriginal = document.getElementById('text-original');
-        const txtModified = document.getElementById('text-modified');
-        const resultsContainer = document.getElementById('results-container');
-        const diffOutput = document.getElementById('diff-output');
-
-        function escapeHtml(unsafe) {
-            return unsafe
-                 .replace(/&/g, "&amp;")
-                 .replace(/</g, "&lt;")
-                 .replace(/>/g, "&gt;")
-                 .replace(/"/g, "&quot;")
-                 .replace(/'/g, "&#039;");
-        }
-
-        btnCompare.addEventListener('click', () => {
-            const original = txtOriginal.value;
-            const modified = txtModified.value;
-
-            if (!original && !modified) {
-                diffOutput.innerHTML = '<span class="text-muted" style="font-style: italic;">Please provide text in both fields to see a comparison.</span>';
-                resultsContainer.classList.remove('hidden');
-                return;
-            }
-
-            const originalText = btnCompare.innerText;
-            btnCompare.innerText = "COMPARING...";
-            
-            setTimeout(() => {
-                const diff = computeDiff(original, modified);
-                let htmlOutput = '';
-                
-                diff.forEach(part => {
-                    const safeValue = escapeHtml(part.value);
-                    if (part.type === 'add') htmlOutput += `<ins>${safeValue}</ins>`;
-                    else if (part.type === 'remove') htmlOutput += `<del>${safeValue}</del>`;
-                    else htmlOutput += safeValue;
-                });
-
-                diffOutput.innerHTML = htmlOutput || '<span class="text-muted" style="font-style: italic;">No differences found. The texts are identical.</span>';
-                
-                resultsContainer.classList.remove('hidden');
-                resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                btnCompare.innerText = originalText;
-            }, 50);
-        });
-    </script>
+    <script src="script.js" defer></script>
+    <script src="compare.js" defer></script>
 </body>
 </html>

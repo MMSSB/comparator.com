@@ -3,39 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workspace | About</title>
-    
+    <title>Comparator | About</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
     <script>
-        function applyTheme(theme) {
-            if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        }
-        applyTheme(localStorage.getItem('theme') || 'system');
+        const t = localStorage.getItem('theme') || 'system';
+        if (t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); }
     </script>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="index.html" class="nav-logo uppercase tracking-widest">Workspace</a>
+    <!-- Change class to set layout: nav-default | nav-left | nav-center | nav-side -->
+<!-- Change class to: nav-right (Default), nav-left, or nav-center -->
+<!-- Example Mix: Desktop Right Align + Mobile Top Drawer + Floating Container -->
+<nav class="navbar nav-center drawer-right nav-bottom">
+    <div class="nav-content">
+        <!-- 1. Logo -->
+        <a href="index.html" class="nav-logo uppercase tracking-widest">Comparator</a>
+        
+        <!-- 2. Nav Links & Theme Switcher (Combined for Mobile Drawer Support) -->
+        <div class="nav-center-group" id="nav-center-group">
             <div class="nav-links uppercase tracking-widest">
-                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link ">Home</a>
                 <a href="compare.html" class="nav-link">Compare</a>
                 <a href="about.html" class="nav-link active">About</a>
             </div>
+
+            <!-- Modern Icon Theme Switcher -->
+            <div class="theme-switcher-nav">
+                <button id="theme-light" class="theme-icon-btn" aria-label="Light Theme">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+                <button id="theme-dark" class="theme-icon-btn" aria-label="Dark Theme">
+                    <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button id="theme-system" class="theme-icon-btn" aria-label="System Theme">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </button>
+            </div>
         </div>
-    </nav>
+
+        <!-- 3. Mobile Hamburger Toggle -->
+        <div class="nav-actions">
+            <button class="nav-toggle" id="mobile-menu-btn" aria-label="Toggle menu">
+                <div class="hamburger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
 
     <main class="container container-sm flex-grow" style="display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;">
-        
         <header style="border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;">
             <h1 class="uppercase font-bold" style="font-size: 2.25rem;">About This Project</h1>
         </header>
@@ -47,23 +70,22 @@
             </p>
         </section>
 
-        <section class="about-grid">
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
             <div style="border: 2px solid var(--border-color); padding: 2rem; display: flex; flex-direction: column; justify-content: center;">
                 <h3 class="text-muted uppercase tracking-widest" style="font-size: 0.875rem; margin-bottom: 0.25rem;">Creator</h3>
                 <p class="uppercase font-bold" style="font-size: 1.5rem;">Made by MMS</p>
                 <p class="font-mono text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">Web & Desktop Developer</p>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: center; padding: 1rem;">
+            <div style="display: flex; align-items: center; justify-content: center;">
                 <a href="https://github.com/mmssb" target="_blank" rel="noopener noreferrer" class="btn-primary uppercase tracking-widest" style="width: 100%; font-size: 1rem; box-shadow: var(--shadow-sm);">
-                    <svg style="width: 1.5rem; height: 1.5rem;" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                    </svg>
+                    <svg style="width: 1.5rem; height: 1.5rem;" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
                     View on GitHub
                 </a>
             </div>
         </section>
     </main>
 
+    <script src="script.js" defer></script>
 </body>
 </html>
